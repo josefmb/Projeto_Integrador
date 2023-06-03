@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/userActions";
+import { removefromcart } from "../redux/actions/cartActions";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,19 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  let items = localStorage.cartItems ? JSON.parse(localStorage.cartItems) : 0;
+
+  const removeCarts = () => {
+    cartItems.forEach(element => {
+      dispatch(removefromcart(element.product));
+    });
+  }
+
   const logoutHandler = () => {
+    removeCarts();
     dispatch(logout());
   };
 
@@ -38,7 +51,7 @@ const Header = () => {
             <div className="row">
               <div className="col-md-3 col-4 d-flex align-items-center">
                 <Link className="navbar-brand" to="/">
-                  <img alt="logo" src="images/logo.png" />
+                  <img alt="logo" src="/images/logo.png" />
                 </Link>
               </div>
               <div className="col-md-6 col-8 d-flex align-items-center">
@@ -66,7 +79,9 @@ const Header = () => {
                 )}
                 <Link to="/cart">
                   <i className="fas fa-shopping-bag"></i>
-                  <span className="badge">0</span>
+                  {items.length > 0 && (
+                    <span className="badge">{items.length}</span>
+                  )}
                 </Link>
               </div>
             </div>

@@ -37,7 +37,7 @@ const ShopSection = () => {
                         key={product._id}
                       >
                         <div className="border-product">
-                          <Link to={`/products/${product._id}`}>
+                          <Link to={`/product/${product._id}`}>
                             <div className="shopBack">
                               <img src={product.image} alt={product.name} />
                             </div>
@@ -45,7 +45,7 @@ const ShopSection = () => {
 
                           <div className="shoptext">
                             <p>
-                              <Link to={`/products/${product._id}`}>
+                              <Link to={`/product/${product._id}`}>
                                 {product.name}
                               </Link>
                             </p>

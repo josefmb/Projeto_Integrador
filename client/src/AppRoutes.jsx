@@ -12,14 +12,17 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
+import SingleProductPage from './pages/SingleProductPage';
+import CartPage from './pages/CartPage';
 
 const AppRoutes = () => {
 
     const Private = ({children}) => {
         let authenticated = localStorage.getItem("userInfo");
 
-        if (!authenticated)
+        if (!authenticated) {
             return <Navigate to="/login" />
+        }
 
         return children;
     }
@@ -28,10 +31,12 @@ const AppRoutes = () => {
         <Router>
             <Routes>
                 <Route exact path="/login" element={ <LoginPage/> } />
-                <Route path="/" element={ <Private><HomePage/></Private> } />
+                <Route path="/" element={ <HomePage/> } />
                 <Route exact path="/register" element={ <RegisterPage /> } />   
                 <Route exact path="/profile" element={ <Private><ProfilePage /></Private> } />
-                <Route exact path="/page/:pagenumber" element={ <Private><HomePage /></Private> } />
+                <Route exact path="/page/:pagenumber" element={ <HomePage /> } />
+                <Route exact path="/product/:id" element={ <SingleProductPage /> } />
+                <Route exact path="/cart/:id?" element={ <Private><CartPage /></Private> } />
             </Routes>
         </Router>
     );
