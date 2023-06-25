@@ -8,6 +8,11 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.QRCode_title {
+  text-align: center;
+}
+
 a {
   text-decoration: none;
   color: black;

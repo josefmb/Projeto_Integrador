@@ -14,8 +14,8 @@ const ProfilePage = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    dispatch(getUserDetails("profile"));
-  }, [dispatch]);
+    dispatch(getUserDetails(userInfo._id));
+  }, [dispatch, userInfo]);
 
   return (
     <>
