@@ -10,8 +10,10 @@ import {
 import {
   userDetailsReducer,
   userLoginReducer,
+  userVerifyPinReducer,
   userRegisterReducer,
   userUpdateProfileReducer,
+  userDefaultAddressReducer,
 } from "./reducers/userReducers";
 
 import { cartReducer } from "./reducers/cartReducers";
@@ -21,9 +23,11 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   productReviewCreate: productCreateReviewReducer,
   userLogin: userLoginReducer,
+  userVerifyingPin: userVerifyPinReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userDefaultAddress: userDefaultAddressReducer,
   cart: cartReducer,
 });
 
@@ -43,9 +47,9 @@ const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
 const initialState = {
   cart: { 
     cartItems: cartItemsFromLocalStorage, 
-    shippingAddress: shippingAddressFromLocalStorage,
   },
-  userLogin: { userInfo: userInfoFromLocalStorage }
+  userLogin: { userInfo: userInfoFromLocalStorage },
+  userDefaultAddress: { defaultAddress: shippingAddressFromLocalStorage }
 };
 
 const middleware = [thunk];

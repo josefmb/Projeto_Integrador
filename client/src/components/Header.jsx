@@ -68,6 +68,7 @@ const Header = () => {
                     </button>
                     <div className="dropdown-menu">
                       <Link className="dropdown-item" to="/profile">Perfil</Link>
+                      <Link className="dropdown-item" to="/adress">Endereço</Link>
                       <Link className="dropdown-item" to="/login" onClick={logoutHandler}>Sair</Link>
                     </div>
                   </div>

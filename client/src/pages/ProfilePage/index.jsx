@@ -17,6 +17,8 @@ const ProfilePage = () => {
     dispatch(getUserDetails(userInfo._id));
   }, [dispatch, userInfo]);
 
+  console.log(userInfo);
+
   return (
     <>
       <Header />

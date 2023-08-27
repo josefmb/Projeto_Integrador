@@ -159,6 +159,9 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 
     await axios.delete(`/api/users/${id}`, config);
 
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("userDefaultAddress");
+
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
     const message =

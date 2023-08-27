@@ -16,13 +16,15 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search ? location.search.split("=")[1] : "/login";
 
   const userRegister = useSelector((state) => state.userRegister);
   const { error, loading, userInfo } = userRegister;
 
   useEffect(() => {
     if (userInfo) {
+      window.alert("Foi enviado um link de verificação para o seu e-mail. Por favor, verifique o seu e-mail");
+      localStorage.removeItem("userInfo");
       navigate(redirect);
     }
   }, [userInfo, navigate, redirect]);

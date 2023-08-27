@@ -1,3 +1,5 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
 body {
   margin: 0;
   font-family: "Josefin Sans", sans-serif;
@@ -7,6 +9,12 @@ body {
   font-size: 17px;
   padding: 0;
   box-sizing: border-box;
+}
+
+.PIN {
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .QRCode_title {
@@ -372,7 +380,8 @@ textarea:focus {
   box-shadow: 0 1px 11px rgba(168, 168, 168, 0.27);
   text-align: center;
 }
-.Login input {
+.Login input,
+.LoginDiv {
   width: 100%;
   padding: 20px 20px;
   margin-top: 20px;
@@ -463,6 +472,7 @@ textarea:focus {
   text-transform: uppercase;
   font-size: 13px;
 }
+
 .form input {
   padding: 20px 10px;
   font-size: 17px;

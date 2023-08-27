@@ -3,6 +3,13 @@ import asyncHandler from "express-async-handler";
 import { protect, admin } from "../Middleware/AuthMiddleware.js";
 import User from "./../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+//import sendEmail from "../utils/sendEmail.js";
+
+import Token from "../models/userEmailToken.js";
+import { mailer } from "../utils/sendEmail.js";
+import crypto from "crypto";
+
+import Address from "../models/addressModel.js";
 
 const userRouter = express.Router();
 
@@ -37,6 +44,23 @@ userRouter.post(
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
+
+      if (!user.verified) {
+        let token = await Token.findOne({ userId: user._id });
+
+        if (!token) {
+          token = await new Token({
+            userId: user._id,
+            token: generateToken(user._id),
+        }).save();
+      
+        const url = `${process.env.BASE_URL}register/${user._id}/verify/${token.token}`;
+        await mailer(user.email, "Verificação de E-mail", url);
+      }
+
+      return res.status(400).send({message: "Foi enviado um e-mail para a sua conta, por favor verifique"});
+    }
+
       res.json({
         _id: user._id,
         name: user.name,
@@ -57,33 +81,62 @@ userRouter.post(
   asyncHandler(async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
 
-    const userExists = await User.findOne({ email });
+    let user = await User.findOne({ email });
 
-    if (userExists) {
+    if (user) {
       res.status(400);
       throw new Error("Usuário já existe");
     }
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-      isAdmin,
-    });
+    const userToken = crypto.randomBytes(32).toString("hex");
+
+    user = await new User({name, email, password, isAdmin, token: userToken}).save()
 
     if (user) {
+      const token = await new Token({
+        userId: user._id,
+        token: userToken,
+      }).save();
+  
+      if (token) {
+        const url = `${process.env.BASE_URL}register/${user._id}/verify/${token.token}`;
+        await mailer(user.email, "Verificação de E-mail", url);
+      } else {
+        res.status(400);
+        throw new Error("Erro ao criar token para verificação do e-mail.");
+      }
+
       res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        token: generateToken(user._id),
+        token: userToken,
       });
     } else {
       res.status(400);
       throw new Error("Dados do Usuário inválidos");
     }
   })
+);
+
+userRouter.get("/:id/verify/:token", asyncHandler(async(req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user)
+      return res.status(400).send({message: "Link Inválido"});
+
+    user.verified = true;
+
+    await user.save();
+    
+    res.status(200).send({message: "E-mail verificado com sucesso!"});
+  } catch (error) {
+    res.status(500);
+    throw new Error("Ocorreu um erro ao validar o e-mail");
+  }
+})
 );
 
 
@@ -115,6 +168,13 @@ userRouter.delete(
   asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
+
+      const address = await Address.findOne({userId: req.params.id});
+
+      if (address) {
+        await address.deleteOne();
+      }
+
       await user.deleteOne();
       res.json({ message: "Usuário deletado" });
     } else {
@@ -205,6 +265,47 @@ userRouter.get(
   asyncHandler(async (req, res) => {
     const users = await User.find({});
     res.json(users);
+  })
+);
+
+
+userRouter.post(
+  "/:id/address",
+  asyncHandler(async(req, res) => {
+    // TODO, passar os membros por parâmetro mesmo
+    const { address, number, city, state, postalCode, complement } = req.body;
+
+    /*const userHasAddress = Address.findOne({ userId: req.params.id });
+
+    if (userHasAddress) {
+      const userPostalCode = Address.findOne( { postalcode });
+
+      if (userPostalCode) {
+        const userAddress = Address.findOne( { address, number });
+
+        if (userAddress) {
+          res.status(400);
+          throw new Error("Endereço já cadastrado para este cliente");
+        }
+      }
+    }*/
+
+    const newAddress = await new Address({address, number, city, state, postalCode, complement, userId: req.params.id }).save()
+
+    if (newAddress) {
+      res.status(201).json(newAddress);
+    } else {
+      res.status(400);
+      throw new Error("Dados do Endereço do Usuário inválidos");
+    }
+  })
+);
+
+userRouter.get(
+  "/:id/defaultAddress",
+  asyncHandler(async(req, res) => {
+    const address = await Address.findOne({userId: req.params.id});
+    res.json(address);
   })
 );
 

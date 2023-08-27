@@ -10,9 +10,18 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_VERIFY_PIN_REQUEST,
+  USER_VERIFY_PIN_SUCCESS,
+  USER_VERIFY_PIN_FAIL,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_CREATE_ADRESS_REQUEST,
+  USER_CREATE_ADRESS_SUCCESS,
+  USER_CREATE_ADRESS_FAIL,
+  USER_GET_DEFAULT_ADDRESS_FAIL,
+  USER_GET_DEFAULT_ADDRESS_REQUEST,
+  USER_GET_DEFAULT_ADDRESS_SUCCESS,
 } from "../constants/userConstants";
 import axios from "axios";
 
@@ -49,10 +58,44 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
+  localStorage.removeItem("userDefaultAddress");
 
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
 };
+
+
+export const verifyEmail = (id, token) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_VERIFY_PIN_REQUEST });
+
+    console.log(id);
+    console.log(token);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/users/${id}/verify/${token}`,
+      config
+    );
+
+    dispatch({ type: USER_VERIFY_PIN_SUCCESS, payload: data });
+
+    localStorage.setItem("userVerifyingPin", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_VERIFY_PIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
 
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -71,9 +114,7 @@ export const register = (name, email, password) => async (dispatch) => {
       config
     );
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -151,3 +192,63 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     });
   }
 };
+
+
+export const saveDefaultAddress = (id, address, number, city, state, postalCode, complement) => async(dispatch) => {
+  try {
+    dispatch({ type: USER_CREATE_ADRESS_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `/api/users/${id}/address`,
+      { address, number, city, state, postalCode, complement },
+      config
+    );
+    dispatch({ type: USER_CREATE_ADRESS_SUCCESS, payload: data });
+
+  } catch (error) {
+    dispatch({
+      type: USER_CREATE_ADRESS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getDefaultAddress = (id) => async(dispatch /*, getState */) => {
+  try {
+    dispatch({ type: USER_GET_DEFAULT_ADDRESS_REQUEST });
+
+    // const {
+    //   userDefaultAddress: { defaultAddress },
+    // } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/${id}/defaultAddress`, config);
+
+    localStorage.setItem("userDefaultAddress", JSON.stringify(data));
+
+    dispatch({ type: USER_GET_DEFAULT_ADDRESS_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: USER_GET_DEFAULT_ADDRESS_FAIL,
+      payload: message,
+    });
+  }
+}
