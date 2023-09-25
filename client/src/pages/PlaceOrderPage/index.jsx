@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import Header from "../../components/Header";
 import Message from "../../components/LoadingError/Error";
 
@@ -8,8 +10,12 @@ const PlaceOrderPage = () => {
   window.scrollTo(0, 0);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+
+  cart.shippingPrice = localStorage.getItem("frete") ? JSON.parse(localStorage.getItem("frete")).valorpac.replace(',', '.') : 0;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -22,8 +28,7 @@ const PlaceOrderPage = () => {
   };
 
   cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qtd, 0));
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 30);
-  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice)).toFixed(2);
+  cart.totalPrice = addDecimals(parseFloat(cart.itemsPrice) + parseFloat(cart.shippingPrice));
 
   return (
     <>

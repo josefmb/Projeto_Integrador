@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
-import { saveShippingAddress } from "../../redux/actions/cartActions";
+import { saveShippingAddress, calcularFrete } from "../../redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { getDefaultAddress } from "../../redux/actions/userActions";
 import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
@@ -21,6 +21,8 @@ const ShippingPage = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(saveShippingAddress({ address, number, city, state, postalCode, complement }));
+        dispatch(calcularFrete());
+
         navigate("/payment");
     };
 

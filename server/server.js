@@ -1,12 +1,11 @@
-import express, { response } from "express";
+import express from "express";
 import dotenv from "dotenv";
-import multer from "multer";
 import connectDatabase from "./config/MongoDb.js";
 import ImportData from "./dataImport.js";
 import productRoute from "./routes/productRoutes.js";
 import userRoute from "./routes/userRoutes.js";
-// import email from "./email/nodemail.js";
-// import sendEmail from "./email/nodemail.js";
+import correiosRoute from "./routes/correiosRoutes.js";
+import warehouseRoute from "./routes/warehouseRoutes.js";
 
 dotenv.config();
 connectDatabase();
@@ -17,21 +16,12 @@ app.use(express.json());
 app.use("/api/import", ImportData);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
+app.use("/api/correios", correiosRoute);
+app.use("/api/warehouse", warehouseRoute);
 
 app.get("/", ( req, res ) => {
     res.send("API rodando...");
 });
-
-// const upload = multer();
-// app.post('/send', (req, res, next) => {
-//     const nome = req.body.nome;
-//     const email = req.body.email;
-//     const mensagem = req.body.mensagem;
-
-//     sendEmail(email, nome, mensagem)
-//         .then(response => res.json(response))
-//         .catch(error => res.json(error));
-// })
 
 const PORT = process.env.PORT || 1000;
 

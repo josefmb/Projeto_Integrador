@@ -275,21 +275,6 @@ userRouter.post(
     // TODO, passar os membros por parâmetro mesmo
     const { address, number, city, state, postalCode, complement } = req.body;
 
-    /*const userHasAddress = Address.findOne({ userId: req.params.id });
-
-    if (userHasAddress) {
-      const userPostalCode = Address.findOne( { postalcode });
-
-      if (userPostalCode) {
-        const userAddress = Address.findOne( { address, number });
-
-        if (userAddress) {
-          res.status(400);
-          throw new Error("Endereço já cadastrado para este cliente");
-        }
-      }
-    }*/
-
     const newAddress = await new Address({address, number, city, state, postalCode, complement, userId: req.params.id }).save()
 
     if (newAddress) {

@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { verifyEmail } from '../../redux/actions/userActions';
+import Header from '../../components/Header';
 
 const VerificaEmail = () => {
     const [urlValida, setUrlValida] = useState(false);
@@ -24,18 +25,18 @@ const VerificaEmail = () => {
     }, [id, token, dispatch]);
 
     return (
-        <Fragment>
-            {urlValida ? (
-                <div>
-                    <h1>E-mail verificado com sucesso</h1>
-                    <Link to='/login'>
-                        <button>Login</button>
-                    </Link>
-                </div>
-            ) : (
-                <h1>Não encontrado</h1>
-            )}
-        </Fragment>
+        <div>
+            <Header />
+            <Fragment>
+                {urlValida ? (
+                    <div className="verificaEmail">
+                        <h1>E-mail verificado com sucesso</h1>
+                    </div>
+                ) : (
+                    <h1>Não encontrado</h1>
+                )}
+            </Fragment>
+        </div>
     );
 }
 

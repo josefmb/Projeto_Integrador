@@ -8,6 +8,7 @@ import EditProductPage from './pages/products/editProducts';
 import LoginPage from './pages/login';
 import AddUserMain from './pages/user/addUsers';
 import EditUserPage from './pages/user/editUsers';
+import AddWareHouse from './components/warehouse/addWareHouse';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route exact path='/addUser' element={ <Private><AddUserMain /></Private> } />
           <Route exact path='/user/:id/edit' element={ <Private><EditUserPage /></Private> } />
           <Route exact path='/login' element={ <LoginPage /> } />
+          <Route exact path='/addWarehouse' element={ <Private><AddWareHouse/></Private> }></Route>
         </Routes>
       </Router>
   );

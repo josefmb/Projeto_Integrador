@@ -222,13 +222,9 @@ export const saveDefaultAddress = (id, address, number, city, state, postalCode,
   }
 };
 
-export const getDefaultAddress = (id) => async(dispatch /*, getState */) => {
+export const getDefaultAddress = (id) => async(dispatch) => {
   try {
     dispatch({ type: USER_GET_DEFAULT_ADDRESS_REQUEST });
-
-    // const {
-    //   userDefaultAddress: { defaultAddress },
-    // } = getState();
 
     const config = {
       headers: {

@@ -28,8 +28,13 @@ const addressSchema = mongoose.Schema(
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
     },
+    warehouse: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
 }
 );
 

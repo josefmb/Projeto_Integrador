@@ -3,10 +3,11 @@ import {
     CART_REMOVE_ITEM,
     CART_SAVE_SHIPPING_ADDRESS,
     CART_SAVE_PAYMENT_METHOD,
+    CALCULAR_FRETE_SUCCESS
   } from "../constants/cartConstants";
   
   export const cartReducer = (
-    state = { cartItems: [], shippingAddress: {} },
+    state = { cartItems: [], shippingAddress: {}, frete: {} },
     action
   ) => {
     switch (action.type) {
@@ -43,6 +44,11 @@ import {
           ...state,
           paymentMethod: action.payload,
         };
+      case CALCULAR_FRETE_SUCCESS:
+        return {
+          ...state,
+          frete: action.payload,
+        }
       default:
         return state;
     }

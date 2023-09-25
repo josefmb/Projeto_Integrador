@@ -21,6 +21,14 @@ body {
   text-align: center;
 }
 
+.verificaEmail {
+  text-align: center;
+}
+
+.verificaEmail h1 {
+  color: #90ee00;
+}
+
 a {
   text-decoration: none;
   color: black;

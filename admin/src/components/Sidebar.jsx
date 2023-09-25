@@ -47,6 +47,12 @@ const Sidebar = () => {
                 <span className="text">Adicionar Usuário</span>
               </NavLink>
             </li>
+            <li className="menu-item">
+              <NavLink activeClassName="active" className="menu-link" to="/addWarehouse">
+                <i className="icon fas fa-warehouse"></i>
+                <span className="text">Adicionar Local de Armazenagem</span>
+              </NavLink>
+            </li>
           </ul>
           <br />
           <br />
