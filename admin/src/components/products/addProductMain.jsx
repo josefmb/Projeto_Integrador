@@ -21,6 +21,7 @@ const AddProductMain = () => {
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [weight, setWeight] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -36,12 +37,13 @@ const AddProductMain = () => {
       setCountInStock(0);
       setImage("");
       setPrice(0);
+      setWeight(0);
     }
   }, [product, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name, price, description, image, countInStock));
+    dispatch(createProduct(name, price, description, image, countInStock, weight));
   };
 
   return (
@@ -71,8 +73,12 @@ const AddProductMain = () => {
                     <input type="number" placeholder="Valor" className="form-control" id="product_price" required value={price} onChange={(e) => setPrice(e.target.value)} />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_price" className="form-label">Quantidade em Estoque</label>
-                    <input type="number" placeholder="Quantidade" className="form-control" id="product_price" required value={countInStock} onChange={(e) => setCountInStock(e.target.value)} />
+                    <label htmlFor="product_weight" className="form-label">Peso(g)</label>
+                    <input type="number" placeholder="Peso" className="form-control" id="product_weight" required value={weight} onChange={(e) => setWeight(e.target.value)} />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="product_quantity" className="form-label">Quantidade em Estoque</label>
+                    <input type="number" placeholder="Quantidade" className="form-control" id="product_quantity" required value={countInStock} onChange={(e) => setCountInStock(e.target.value)} />
                   </div>
                   <div className="mb-4">
                     <label className="form-label">Descrição</label>

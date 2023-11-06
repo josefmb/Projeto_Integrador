@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import Header from "../../components/Header";
 import Message from "../../components/LoadingError/Error";
@@ -10,11 +9,13 @@ const PlaceOrderPage = () => {
   window.scrollTo(0, 0);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
 
-  cart.shippingPrice = localStorage.getItem("frete") ? JSON.parse(localStorage.getItem("frete")).valorpac.replace(',', '.') : 0;
+  cart.shippingPrice = localStorage.getItem("frete") ? 
+                       JSON.parse(localStorage.getItem("frete")).valorpac != null ? JSON.parse(localStorage.getItem("frete")).valorpac.replace(',', '.') 
+                       : 22.53
+                       : 22.53;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;

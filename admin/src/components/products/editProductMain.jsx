@@ -26,6 +26,7 @@ const EditProductMain = () => {
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [weight, setWeight] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -52,6 +53,7 @@ const EditProductMain = () => {
         setCountInStock(product.countInStock);
         setImage(product.image);
         setPrice(product.price);
+        setWeight(product.weight)
       }
     }
   }, [product, dispatch, id, successUpdate]);
@@ -66,6 +68,7 @@ const EditProductMain = () => {
         description,
         image,
         countInStock,
+        weight,
       })
     );
   };
@@ -105,8 +108,12 @@ const EditProductMain = () => {
                         <input type="number" placeholder="Valor:" className="form-control" id="product_price" required value={price} onChange={(e) => setPrice(e.target.value)} />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="product_price" className="form-label">Quantidade em Estoque</label>
-                        <input type="number" placeholder="Quantidade:" className="form-control" id="product_price" required value={countInStock} onChange={(e) => setCountInStock(e.target.value)} />
+                        <label htmlFor="product_weight" className="form-label">Peso(g) </label>
+                        <input type="number" placeholder="Peso:" className="form-control" id="product_weight" required value={weight} onChange={(e) => setWeight(e.target.value)} />
+                      </div>
+                      <div className="mb-4">
+                        <label htmlFor="product_quantity" className="form-label">Quantidade em Estoque</label>
+                        <input type="number" placeholder="Quantidade:" className="form-control" id="product_quantity" required value={countInStock} onChange={(e) => setCountInStock(e.target.value)} />
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Descrição</label>

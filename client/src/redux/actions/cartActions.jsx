@@ -20,6 +20,7 @@ export const addToCart = (id, qtd) => async (dispatch, getState) => {
       image: data.image,
       price: data.price,
       countInStock: data.countInStock,
+      weight: data.weight,
       qtd,
     },
   });
@@ -67,7 +68,9 @@ export const calcularFrete = () => async(dispatch) => {
     };
 
     const cepDestino = JSON.parse(localStorage.getItem("shippingAddress")).postalCode;
-    const pesoProduto = 10;
+
+    let pesoProduto = 0;
+    JSON.parse(localStorage.getItem("cartItems").map((x) => pesoProduto += x.product.qtd * x.product.weight));
 
     console.log(cepDestino, pesoProduto);
 

@@ -25,7 +25,7 @@ export const saveWareHouseAddress =
                 },
             };
 
-            const { data } = await axios.post(
+            const { data } = await axios.put(
                 `/api/warehouse`,
                 { address, number, city, state, postalCode, complement },
                 config
@@ -41,3 +41,20 @@ export const saveWareHouseAddress =
             });
         }
     };
+
+export const editWarehouseAddress = () => async(dispatch) => {
+    try {
+        dispatch({ type: WAREHOUSE_EDIT_REQUEST });
+        const { data } = await axios.get(`/api/warehouse`);
+        dispatch({ type: WAREHOUSE_EDIT_SUCCESS, payload: data });
+      } catch (error) {
+        const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        dispatch({
+          type: WAREHOUSE_EDIT_FAIL,
+          payload: message,
+        });
+      }
+};

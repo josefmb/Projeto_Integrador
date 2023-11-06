@@ -50,7 +50,7 @@ const Sidebar = () => {
             <li className="menu-item">
               <NavLink activeClassName="active" className="menu-link" to="/addWarehouse">
                 <i className="icon fas fa-warehouse"></i>
-                <span className="text">Adicionar Local de Armazenagem</span>
+                <span className="text">Adicionar Local</span>
               </NavLink>
             </li>
           </ul>

@@ -21,7 +21,7 @@ const ShippingPage = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(saveShippingAddress({ address, number, city, state, postalCode, complement }));
-        dispatch(calcularFrete());
+        //dispatch(calcularFrete());
 
         navigate("/payment");
     };

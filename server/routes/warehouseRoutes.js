@@ -4,16 +4,30 @@ import Address from "../models/addressModel.js";
 
 const warehouseRoute = express.Router();
 
-warehouseRoute.post('/', asyncHandler(async(request, response) => {
+warehouseRoute.put('/', asyncHandler(async(request, response) => {
     const { address, number, city, state, postalCode, complement } = request.body;
 
-    const newAddress = await new Address({address, number, city, state, postalCode, complement, warehouse: true }).save()
+    const existingAddress = await Address.findOne({warehouse: true});
 
-    if (newAddress) {
-        response.status(201).json(newAddress);
+    if (existingAddress) {
+        existingAddress.address = address || existingAddress.address;
+        existingAddress.number = number || existingAddress.number;
+        existingAddress.city = city || existingAddress.city;
+        existingAddress.state = state || existingAddress.state;
+        existingAddress.postalCode = postalCode || existingAddress.postalCode;
+        existingAddress.complement = complement || existingAddress.complement;
+
+        const updatedAddress = existingAddress.save();
+        response.json(updatedAddress);
     } else {
-        response.status(400);
-        throw new Error("Dados do Endereço do Local de Armazenagem inválidos");
+        const newAddress = await new Address({address, number, city, state, postalCode, complement, warehouse: true }).save()
+
+        if (newAddress) {
+            response.status(201).json(newAddress);
+        } else {
+            response.status(400);
+            throw new Error("Dados do Endereço do Local de Armazenagem inválidos");
+        }
     }
 }));
 

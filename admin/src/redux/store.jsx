@@ -17,6 +17,12 @@ import {
   productUpdateReducer,
 } from "./reducers/productReducer";
 
+import { 
+  warehouseCreateReducer,
+  warehouseEditReducer,
+  warehouseUpdateReducer,
+} from "./reducers/warehouseReducer";
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userList: userListReducer,
@@ -29,6 +35,9 @@ const reducer = combineReducers({
   productCreate: productCreateReducer,
   productEdit: productEditReducer,
   productUpdate: productUpdateReducer,
+  warehouseCreate: warehouseCreateReducer,
+  warehouseEdit: warehouseEditReducer,
+  warehouseUpdate: warehouseUpdateReducer,
 });
 
 

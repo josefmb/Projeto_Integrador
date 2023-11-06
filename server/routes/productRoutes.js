@@ -70,7 +70,7 @@ productRoute.delete(
 productRoute.post(
   "/",
   asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, price, description, image, countInStock, weight } = req.body;
     const productExist = await Product.findOne({ name });
     if (productExist) {
       res.status(400);
@@ -82,6 +82,7 @@ productRoute.post(
         description,
         image,
         countInStock,
+        weight
       });
       if (product) {
         const createdproduct = await product.save();
@@ -98,7 +99,7 @@ productRoute.post(
 productRoute.put(
   "/:id",
   asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, price, description, image, countInStock, weight } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
@@ -106,6 +107,7 @@ productRoute.put(
       product.description = description || product.description;
       product.image = image || product.image;
       product.countInStock = countInStock || product.countInStock;
+      product.weight = weight || product.weight;
 
       const updatedProduct = await product.save();
       res.json(updatedProduct);
