@@ -2,10 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
-import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
-import { states } from "../../components/StateComponent";
 
 import { getDefaultAddress, saveDefaultAddress } from "../../redux/actions/userActions";
+
+import Select from 'react-select';
+
+const ufOptions = [
+    { value: 'AC', label: 'AC' },
+    { value: 'AL', label: 'AL' },
+    { value: 'AP', label: 'AP' },
+    { value: 'AM', label: 'AM' },
+    { value: 'BA', label: 'BA' },
+    { value: 'CE', label: 'CE' },
+    { value: 'DF', label: 'DF' },
+    { value: 'ES', label: 'ES' },
+    { value: 'GO', label: 'GO' },
+    { value: 'MA', label: 'MA' },
+    { value: 'MT', label: 'MT' },
+    { value: 'MS', label: 'MS' },
+    { value: 'MG', label: 'MG' },
+    { value: 'PA', label: 'PA' },
+    { value: 'PB', label: 'PB' },
+    { value: 'PR', label: 'PR' },
+    { value: 'PE', label: 'PE' },
+    { value: 'PI', label: 'PI' },
+    { value: 'RJ', label: 'RJ' },
+    { value: 'RN', label: 'RN' },
+    { value: 'RS', label: 'RS' },
+    { value: 'RO', label: 'RO' },
+    { value: 'RR', label: 'RR' },
+    { value: 'SC', label: 'SC' },
+    { value: 'SP', label: 'SP' },
+    { value: 'SE', label: 'SE' },
+    { value: 'TO', label: 'TO' },
+  ];
 
 const AdressPage = () => {
     const [address, setAddress] = useState("");
@@ -59,6 +89,10 @@ const AdressPage = () => {
 
     }, []);
 
+    const handleChangeSelect = (e) => {
+        setState(e);
+      };
+
     return (
         <>
             <Header />
@@ -74,9 +108,8 @@ const AdressPage = () => {
                     <input type="text" placeholder="Cidade" value={city} required
                         onChange={(e) => setCity(e.target.value)}
                     />
-                    <div className="LoginDiv">
-                        <ComboBoxComponent placeholder="Estado" dataSource={states} value={state}
-                        onChange={(e) => setState(e.target.value)}></ComboBoxComponent>
+                    <div className="mb-4">
+                        <Select options={ufOptions} value={state} className="LoginSelect" placeholder="UF" onChange={handleChangeSelect}></Select>
                     </div>
                     <input type="text" placeholder="CEP" value={postalCode} required
                         onChange={(e) => setPostalCode(e.target.value)}
