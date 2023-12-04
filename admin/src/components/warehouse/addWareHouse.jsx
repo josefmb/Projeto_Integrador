@@ -1,13 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import StateComponent from "../../components/StateComponent";
 import { editWarehouseAddress, saveWareHouseAddress } from "../../redux/actions/wareHouseActions";
 import Toast from "../LoadingError/Toast";
 import { WAREHOUSE_UPDATE_RESET } from "../../redux/constants/warehouseConstants";
 
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Select from 'react-select';
+
+const ufOptions = [
+    { value: 'AC', label: 'AC' },
+    { value: 'AL', label: 'AL' },
+    { value: 'AP', label: 'AP' },
+    { value: 'AM', label: 'AM' },
+    { value: 'BA', label: 'BA' },
+    { value: 'CE', label: 'CE' },
+    { value: 'DF', label: 'DF' },
+    { value: 'ES', label: 'ES' },
+    { value: 'GO', label: 'GO' },
+    { value: 'MA', label: 'MA' },
+    { value: 'MT', label: 'MT' },
+    { value: 'MS', label: 'MS' },
+    { value: 'MG', label: 'MG' },
+    { value: 'PA', label: 'PA' },
+    { value: 'PB', label: 'PB' },
+    { value: 'PR', label: 'PR' },
+    { value: 'PE', label: 'PE' },
+    { value: 'PI', label: 'PI' },
+    { value: 'RJ', label: 'RJ' },
+    { value: 'RN', label: 'RN' },
+    { value: 'RS', label: 'RS' },
+    { value: 'RO', label: 'RO' },
+    { value: 'RR', label: 'RR' },
+    { value: 'SC', label: 'SC' },
+    { value: 'SP', label: 'SP' },
+    { value: 'SE', label: 'SE' },
+    { value: 'TO', label: 'TO' },
+  ];
 
 const AddWareHouse = () => {
     const [address, setAddress] = useState("");
@@ -54,6 +82,10 @@ const AddWareHouse = () => {
         navigate("/");
     };
 
+    const handleChangeSelect = (e) => {
+      setState(e);
+    };
+
     return (
       <>
       <Toast />
@@ -84,39 +116,7 @@ const AddWareHouse = () => {
                   </div>
                   <div className="mb-4">
                     <label htmlFor="warehouse_state" className="form-label">Estado</label>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <DropdownButton id="dropdown-basic-button" title="Estados" onSelect={(e) => setState(e)}>
-                      <Dropdown.Item eventKey="AC">AC</Dropdown.Item>
-                      <Dropdown.Item eventKey="AL">AL</Dropdown.Item>
-                      <Dropdown.Item eventKey="AM">AM</Dropdown.Item>
-                      <Dropdown.Item eventKey="AP">AP</Dropdown.Item>
-                      <Dropdown.Item eventKey="BA">BA</Dropdown.Item>
-                      <Dropdown.Item eventKey="CE">CE</Dropdown.Item>
-                      <Dropdown.Item eventKey="DF">DF</Dropdown.Item>
-                      <Dropdown.Item eventKey="ES">ES</Dropdown.Item>
-                      <Dropdown.Item eventKey="GO">GO</Dropdown.Item>
-                      <Dropdown.Item eventKey="MA">MA</Dropdown.Item>
-                      <Dropdown.Item eventKey="MT">MT</Dropdown.Item>
-                      <Dropdown.Item eventKey="MS">MS</Dropdown.Item>
-                      <Dropdown.Item eventKey="MG">MG</Dropdown.Item>
-                      <Dropdown.Item eventKey="PA">PA</Dropdown.Item>
-                      <Dropdown.Item eventKey="PB">PB</Dropdown.Item>
-                      <Dropdown.Item eventKey="PE">PE</Dropdown.Item>
-                      <Dropdown.Item eventKey="PI">PI</Dropdown.Item>
-                      <Dropdown.Item eventKey="PR">PR</Dropdown.Item>
-                      <Dropdown.Item eventKey="RJ">RJ</Dropdown.Item>
-                      <Dropdown.Item eventKey="RN">RN</Dropdown.Item>
-                      <Dropdown.Item eventKey="RO">RO</Dropdown.Item>
-                      <Dropdown.Item eventKey="RS">RS</Dropdown.Item>
-                      <Dropdown.Item eventKey="RR">RR</Dropdown.Item>
-                      <Dropdown.Item eventKey="SC">SC</Dropdown.Item>
-                      <Dropdown.Item eventKey="SE">SE</Dropdown.Item>
-                      <Dropdown.Item eventKey="SP">SP</Dropdown.Item>
-                      <Dropdown.Item eventKey="TO">TO</Dropdown.Item>
-                    </DropdownButton> 
-                    {/* <StateComponent onChange={(e) => setState(e.target.value)}/> */}
-                    <input type="text" placeholder="Estado" className="form-control" value={state} readOnly/>
-                    </div>
+                      <Select options={ufOptions} value={state} className="LoginSelect" placeholder="UF" onChange={handleChangeSelect}></Select>
                   </div>
                   <div className="mb-4">
                     <label htmlFor="warehouse_postalcode" className="form-label">CEP</label>
