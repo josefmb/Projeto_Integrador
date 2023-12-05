@@ -4,9 +4,7 @@
         "src": "./server.js",
         "use": "@vercel/node"
     }],
-    "entrypoints": [{ 
-        "src": "/(.*)", "dest": "/vercel/path0/server.js" 
-    }],      
+       
     "routes": [{
         "src": "/(.*)",
         "dest": "/"
