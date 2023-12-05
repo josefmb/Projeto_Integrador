@@ -1,7 +1,7 @@
-let soap    = require('soap');
-let request = require('request');
+import soap from "soap";
+import request from "request";
 
-module.exports = class Correios {
+class Correios {
   constructor(width) {
     this.calcPrecoUrl = 'https://www.cepcerto.com/ws/json-frete/{cepOrigem}/{cepDestino}/{pesoProduto}/1/1/1/4ab9864150c4752e092124185f912a27adb50d16';
     this.cepUrl       = 'http://viacep.com.br/ws/{CEP}/json';
@@ -90,3 +90,5 @@ module.exports = class Correios {
     });
   }
 }
+
+export default Correios;
