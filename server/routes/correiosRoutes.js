@@ -1,11 +1,12 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
-import nodeCorreios from "node-correios";
 import Address from "../models/addressModel.js";
+
+import Correios from "../correios.js";
 
 const correiosRoute = express.Router();
 
-const correios = new nodeCorreios();
+const correios = new Correios();
 
 correiosRoute.post('/cep', asyncHandler(async(request, response) => {
     const { cep } = request.body;
