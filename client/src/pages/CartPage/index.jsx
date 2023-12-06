@@ -53,7 +53,7 @@ const CartPage = () => {
                 ({cartItems == null ? 0 : cartItems.length})
               </Link>
             </div>
-            {cartItems == null ? "" : cartItems.map((item) => (
+            {cartItems?.map((item) => (
               <React.Fragment key={item.id}>
                 <div className="cart-iterm row">
                   <div
