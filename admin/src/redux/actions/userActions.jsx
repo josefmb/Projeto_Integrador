@@ -157,7 +157,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/users/${id}`, config);
+    await axios.delete(`https://e-commerce-automotivo-server.vercel.app/api/users/${id}`, config);
 
     localStorage.removeItem("userInfo");
     localStorage.removeItem("userDefaultAddress");
