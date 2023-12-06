@@ -14,7 +14,7 @@ export const listProduct =
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
-        process.env.BACKEND_URI + `/api/products?pageNumber=${pageNumber}`
+        `https://e-commerce-automotivo-server.vercel.app/api/products?pageNumber=${pageNumber}`
       );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
