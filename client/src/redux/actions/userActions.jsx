@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      process.env.BACKEND_URI + `/api/users/login`,
+      `https://e-commerce-automotivo-server.vercel.app/api/users/login`,
       { email, password },
       config
     );
@@ -109,7 +109,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      process.env.BACKEND_URI + `/api/users`,
+      `https://e-commerce-automotivo-server.vercel.app/api/users`,
       { name, email, password },
       config
     );

@@ -75,7 +75,7 @@ export const calcularFrete = () => async(dispatch) => {
     console.log(cepDestino, pesoProduto);
 
     const { data } = await axios.post(
-      process.env.BACKEND_URI + `api/correios/frete`,
+      `https://e-commerce-automotivo-server.vercel.app/api/correios/frete`,
       {cepDestino, pesoProduto},
       config
     );
