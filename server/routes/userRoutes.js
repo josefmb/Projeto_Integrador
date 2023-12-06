@@ -54,7 +54,7 @@ userRouter.post(
             token: generateToken(user._id),
         }).save();
       
-        const url = `${process.env.BASE_URL}register/${user._id}/verify/${token.token}`;
+        const url = `https://client-automotivo-ecommerce.vercel.app/register/${user._id}/verify/${token.token}`;
         await mailer(user.email, "Verificação de E-mail", url);
       }
 
@@ -99,7 +99,7 @@ userRouter.post(
       }).save();
   
       if (token) {
-        const url = `${process.env.BASE_URL}register/${user._id}/verify/${token.token}`;
+        const url = `https://client-automotivo-ecommerce.vercel.app/register/${user._id}/verify/${token.token}`;
         await mailer(user.email, "Verificação de E-mail", url);
       } else {
         res.status(400);
