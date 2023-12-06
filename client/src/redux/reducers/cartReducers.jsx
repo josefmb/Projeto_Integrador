@@ -13,7 +13,7 @@ import {
     switch (action.type) {
       case CART_ADD_ITEM:
         const item = action.payload;
-        // const existItem = state.cartItems.find((x) => x.product === item.product);
+        const existItem = state.cartItems.find((x) => x.product === item.product);
   
         // if (existItem) {
         //   return {
@@ -23,11 +23,14 @@ import {
         //     ),
         //   };
         // } else {
-          return {
-            ...state,
-            cartItems: [...state.cartItems, item],
-          };
-        //}
+          if (state.cartItems)
+          {
+            return {
+              ...state,
+              cartItems: [...state.cartItems, item],
+            };
+          }
+          break;
       case CART_REMOVE_ITEM:
         return {
           ...state,
