@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
-import { saveShippingAddress, calcularFrete } from "../../redux/actions/cartActions";
+import { saveShippingAddress } from "../../redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { getDefaultAddress } from "../../redux/actions/userActions";
 
@@ -92,7 +92,7 @@ const ShippingPage = () => {
 
         setDefaultAddress();
 
-    }, []);
+    });
 
     return (
         <>

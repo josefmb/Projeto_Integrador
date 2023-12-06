@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Message from "../../components/LoadingError/Error";
@@ -34,8 +34,6 @@ const api = axios.create({
 
 const PlaceOrderPage = () => {
   window.scrollTo(0, 0);
-
-  const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
 
