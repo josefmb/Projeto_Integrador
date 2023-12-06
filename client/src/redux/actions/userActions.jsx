@@ -173,7 +173,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(process.env.BACKEND_URI + `/api/users/profile`, user, config);
+    const { data } = await axios.put(`https://e-commerce-automotivo-server.vercel.app/api/users/profile`, user, config);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -232,7 +232,7 @@ export const getDefaultAddress = (id) => async(dispatch) => {
       },
     };
 
-    const { data } = await axios.get(process.env.BACKEND_URI + `/api/users/${id}/defaultAddress`, config);
+    const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/users/${id}/defaultAddress`, config);
 
     localStorage.setItem("userDefaultAddress", JSON.stringify(data));
 
