@@ -12,8 +12,6 @@ import {
 export const addToCart = (id, qtd) => async (dispatch, getState) => {
   const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/products/${id}`);
 
-  console.log(data);
-
   dispatch({
     type: CART_ADD_ITEM,
     payload: {
