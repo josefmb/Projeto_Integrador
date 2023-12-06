@@ -69,9 +69,6 @@ export const verifyEmail = (id, token) => async (dispatch) => {
   try {
     dispatch({ type: USER_VERIFY_PIN_REQUEST });
 
-    console.log(id);
-    console.log(token);
-
     const config = {
       headers: {
         "Content-Type": "application/json",

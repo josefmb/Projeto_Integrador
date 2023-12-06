@@ -53,7 +53,7 @@ const AdressPage = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(saveDefaultAddress(userInfo._id, address, number, city, state, postalCode, complement));
+        dispatch(saveDefaultAddress(userInfo._id, address, number, city, state.value, postalCode, complement));
         dispatch(getDefaultAddress(userInfo._id));
         navigate("/");
     };

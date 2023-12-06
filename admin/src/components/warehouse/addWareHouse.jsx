@@ -77,7 +77,6 @@ const AddWareHouse = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(address, number, city, state, postalCode, complement);
         dispatch(saveWareHouseAddress(address, number, city, state, postalCode, complement));
         navigate("/");
     };

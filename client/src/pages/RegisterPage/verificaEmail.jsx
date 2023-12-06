@@ -12,11 +12,9 @@ const VerificaEmail = () => {
     useEffect(() => {
         const verificaEmailUrl = () => {
             try {
-                console.log(id);
                 dispatch(verifyEmail(id, token));
                 setUrlValida(true);
             } catch (error) {
-                console.log(error);
                 setUrlValida(false);
             }
         };
