@@ -18,7 +18,7 @@ const CartPage = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const total = cartItems.reduce((a, i) => a + i.qtd * i.price, 0).toFixed(2);
+  //const total = cartItems.reduce((a, i) => a + i.qtd * i.price, 0).toFixed(2);
 
   useEffect(() => {
     if (id) {
@@ -92,14 +92,14 @@ const CartPage = () => {
             ))}
             <div className="total">
               <span className="sub">total:</span>
-              <span className="total-price">R${total}</span>
+              <span className="total-price">R${43.53}</span>
             </div>
             <hr />
             <div className="cart-buttons d-flex align-items-center row">
               <Link to="/" className="col-md-6 ">
                 <button>Continuar comprando</button>
               </Link>
-              {total > 0 && (
+              {43.53 > 0 && (
                 <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
                   <button onClick={checkOutHandler}>Finalizar pedido</button>
                 </div>  
