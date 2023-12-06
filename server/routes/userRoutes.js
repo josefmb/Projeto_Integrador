@@ -275,6 +275,13 @@ userRouter.post(
     // TODO, passar os membros por parâmetro mesmo
     const { address, number, city, state, postalCode, complement } = req.body;
 
+    console.log(address);
+    console.log(number);
+    console.log(city);
+    console.log(state);
+    console.log(postalCode);
+    console.log(complement);
+    
     const newAddress = await new Address({address, number, city, state, postalCode, complement, userId: req.params.id }).save()
 
     if (newAddress) {
