@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { verifyEmail } from '../../redux/actions/userActions';
 import Header from '../../components/Header';
