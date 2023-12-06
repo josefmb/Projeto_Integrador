@@ -26,7 +26,7 @@ export const saveWareHouseAddress =
             };
 
             const { data } = await axios.put(
-                `/api/warehouse`,
+                `https://e-commerce-automotivo-server.vercel.app/api/warehouse`,
                 { address, number, city, state, postalCode, complement },
                 config
             );

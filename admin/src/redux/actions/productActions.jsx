@@ -160,7 +160,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/products/${product._id}`,
+      `https://e-commerce-automotivo-server.vercel.app/api/products/${product._id}`,
       product,
       config
     );

@@ -215,7 +215,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/users/${user._id}`,
+      `https://e-commerce-automotivo-server.vercel.app/api/users/${user._id}`,
       user,
       config
     );
