@@ -10,7 +10,7 @@ import {
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qtd) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/products/${id}`);
+  const { data } = await axios.get(process.env.BACKEND_URI + `/api/products/${id}`);
 
   dispatch({
     type: CART_ADD_ITEM,
@@ -75,7 +75,7 @@ export const calcularFrete = () => async(dispatch) => {
     console.log(cepDestino, pesoProduto);
 
     const { data } = await axios.post(
-      `api/correios/frete`,
+      process.env.BACKEND_URI + `api/correios/frete`,
       {cepDestino, pesoProduto},
       config
     );

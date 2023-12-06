@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/users/login`,
+      process.env.BACKEND_URI + `/api/users/login`,
       { email, password },
       config
     );
@@ -79,7 +79,7 @@ export const verifyEmail = (id, token) => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `/api/users/${id}/verify/${token}`,
+      process.env.BACKEND_URI + `/api/users/${id}/verify/${token}`,
       config
     );
 
@@ -109,7 +109,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/users`,
+      process.env.BACKEND_URI + `/api/users`,
       { name, email, password },
       config
     );
@@ -140,7 +140,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get(process.env.BACKEND_URI + `/api/users/${id}`, config);
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -173,7 +173,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/api/users/profile`, user, config);
+    const { data } = await axios.put(process.env.BACKEND_URI + `/api/users/profile`, user, config);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -205,7 +205,7 @@ export const saveDefaultAddress = (id, address, number, city, state, postalCode,
     };
 
     const { data } = await axios.post(
-      `/api/users/${id}/address`,
+      process.env.BACKEND_URI + `/api/users/${id}/address`,
       { address, number, city, state, postalCode, complement },
       config
     );
@@ -232,7 +232,7 @@ export const getDefaultAddress = (id) => async(dispatch) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/${id}/defaultAddress`, config);
+    const { data } = await axios.get(process.env.BACKEND_URI + `/api/users/${id}/defaultAddress`, config);
 
     localStorage.setItem("userDefaultAddress", JSON.stringify(data));
 
