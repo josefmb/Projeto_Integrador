@@ -92,7 +92,7 @@ const CartPage = () => {
             ))}
             <div className="total">
               <span className="sub">total:</span>
-              <span className="total-price">R${43.53}</span>
+              <span className="total-price">R${total}</span>
             </div>
             <hr />
             <div className="cart-buttons d-flex align-items-center row">

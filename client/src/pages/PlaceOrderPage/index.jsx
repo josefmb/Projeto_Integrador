@@ -83,6 +83,7 @@ const PlaceOrderPage = () => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
 
+  cart.cartItems.reduce((acc, item) => description !== "" ? " | " + item.name : item.name, 0);
   cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qtd, 0));
   cart.totalPrice = addDecimals(parseFloat(cart.itemsPrice) + parseFloat(cart.shippingPrice));
 
@@ -162,10 +163,8 @@ const PlaceOrderPage = () => {
                 <>
                   {cart.cartItems.map((item, index) => (
                     <div className="order-product row" key={index}>
-                      { index !== 0 ? description += " | " : null }
                       <div className="col-md-3 col-6">
                         <img src={item.image} alt={item.name} />
-                        {description += item.name}
                       </div>
                       <div className="col-md-5 col-6 d-flex align-items-center">
                         <Link to={`/products/${item.product}`}>
