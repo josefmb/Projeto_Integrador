@@ -16,8 +16,9 @@ const CartPage = () => {
   const qtd = location.search ? Number(location.search.split("=")[1]) : 1;
 
   const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
-  const total = cart.cartItems.reduce((a, i) => a + i.qtd * i.price, 0).toFixed(2);
+  const total = cartItems.reduce((a, i) => a + (i.qtd * i.price), 0).toFixed(2);
 
   useEffect(() => {
     if (id) {
@@ -37,7 +38,7 @@ const CartPage = () => {
     <>
       <Header />
       <div className="container">
-        {cart.cartItems.length === 0 ? (
+        {cartItems.length === 0 ? (
           <div className=" alert alert-info text-center mt-3">
             Seu carrinho está vazio
             <Link className="btn btn-success mx-5 px-5 py-3" to="/" style={{ fontSize: "12px" }}>
@@ -49,10 +50,10 @@ const CartPage = () => {
             <div className=" alert alert-info text-center mt-3">
               Total de itens
               <Link className="text-success mx-2" to="/cart">
-                ({cart.cartItems.length})
+                ({cartItems.length})
               </Link>
             </div>
-            {cart.cartItems.map((item) => (
+            {cartItems.map((item) => (
               <React.Fragment key={item.id}>
                 <div className="cart-iterm row">
                   <div
