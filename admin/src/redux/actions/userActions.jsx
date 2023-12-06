@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/users/login`,
+      `https://e-commerce-automotivo-server.vercel.app/api/users/login`,
       { email, password },
       config
     );
@@ -93,7 +93,7 @@ export const listUser = (pageNumber = " ") => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/?pageNumber=${pageNumber}`, config);
+    const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/users/?pageNumber=${pageNumber}`, config);
 
     dispatch({ type: USER_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -124,7 +124,7 @@ export const createUser =
       };
   
       const { data } = await axios.post(
-        `/api/users/`,
+        `https://e-commerce-automotivo-server.vercel.app/api/users/`,
         { name, email, password, isAdmin },
         config
       );
@@ -181,7 +181,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 export const editUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_EDIT_REQUEST });
-    const { data } = await axios.get(`/api/users/${id}`);
+    const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/users/${id}`);
     dispatch({ type: USER_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =

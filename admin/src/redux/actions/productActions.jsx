@@ -32,7 +32,7 @@ export const listProducts = (pageNumber = " ") => async (dispatch, getState) => 
       },
     };
 
-    const { data } = await axios.get(`/api/products/?pageNumber=${pageNumber}`, config);
+    const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/products/?pageNumber=${pageNumber}`, config);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -101,7 +101,7 @@ export const createProduct =
       };
 
       const { data } = await axios.post(
-        `/api/products/`,
+        `https://e-commerce-automotivo-server.vercel.app/api/products/`,
         { name, price, description, image, countInStock, weight },
         config
       );
@@ -126,7 +126,7 @@ export const createProduct =
 export const editProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_EDIT_REQUEST });
-    const { data } = await axios.get(`/api/products/${id}`);
+    const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/products/${id}`);
     dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =

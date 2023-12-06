@@ -45,7 +45,7 @@ export const saveWareHouseAddress =
 export const editWarehouseAddress = () => async(dispatch) => {
     try {
         dispatch({ type: WAREHOUSE_EDIT_REQUEST });
-        const { data } = await axios.get(`/api/warehouse`);
+        const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/warehouse`);
         dispatch({ type: WAREHOUSE_EDIT_SUCCESS, payload: data });
       } catch (error) {
         const message =
