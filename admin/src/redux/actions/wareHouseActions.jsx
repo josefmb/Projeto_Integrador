@@ -17,7 +17,7 @@ export const saveWareHouseAddress =
     (address, number, city, state, postalCode, complement) => 
     async (dispatch) => {
         try {
-            dispatch({ type: WAREHOUSE_CREATE_REQUEST });
+            dispatch({ type: WAREHOUSE_UPDATE_REQUEST });
 
             const config = {
                 headers: {
@@ -31,9 +31,9 @@ export const saveWareHouseAddress =
                 config
             );
 
-            dispatch({ type: WAREHOUSE_CREATE_SUCCESS, payload: data });
+            dispatch({ type: WAREHOUSE_UPDATE_SUCCESS, payload: data });
         } catch (error) {
-            dispatch({ type: WAREHOUSE_CREATE_FAIL, 
+            dispatch({ type: WAREHOUSE_UPDATE_FAIL, 
                        payload:
                           error.response && error.response.data.message
                         ? error.response.data.message
