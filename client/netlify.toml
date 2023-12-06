@@ -5,5 +5,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/HomePage.jsx"
+  to = "/index.html"
   status = 200
