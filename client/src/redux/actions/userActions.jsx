@@ -79,7 +79,7 @@ export const verifyEmail = (id, token) => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      process.env.BACKEND_URI + `/api/users/${id}/verify/${token}`,
+      `https://e-commerce-automotivo-server.vercel.app/api/users/${id}/verify/${token}`,
       config
     );
 
@@ -140,7 +140,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(process.env.BACKEND_URI + `/api/users/${id}`, config);
+    const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/users/${id}`, config);
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -205,7 +205,7 @@ export const saveDefaultAddress = (id, address, number, city, state, postalCode,
     };
 
     const { data } = await axios.post(
-      process.env.BACKEND_URI + `/api/users/${id}/address`,
+      `https://e-commerce-automotivo-server.vercel.app/api/users/${id}/address`,
       { address, number, city, state, postalCode, complement },
       config
     );

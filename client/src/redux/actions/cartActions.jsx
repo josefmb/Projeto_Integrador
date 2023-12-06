@@ -10,7 +10,7 @@ import {
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qtd) => async (dispatch, getState) => {
-  const { data } = await axios.get(process.env.BACKEND_URI + `/api/products/${id}`);
+  const { data } = await axios.get(`https://e-commerce-automotivo-server.vercel.app/api/products/${id}`);
 
   dispatch({
     type: CART_ADD_ITEM,
