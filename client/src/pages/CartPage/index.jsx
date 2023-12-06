@@ -15,8 +15,8 @@ const CartPage = () => {
 
   const qtd = location.search ? Number(location.search.split("=")[1]) : 1;
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  // const cart = useSelector((state) => state.cart);
+  // const { cartItems } = cart;
 
   //const total = cartItems.reduce((a, i) => a + i.qtd * i.price, 0).toFixed(2);
 
@@ -38,22 +38,22 @@ const CartPage = () => {
     <>
       <Header />
       <div className="container">
-        {cartItems.length === 0 ? (
+        {/* {cartItems.length === 0 ? (
           <div className=" alert alert-info text-center mt-3">
             Seu carrinho está vazio
             <Link className="btn btn-success mx-5 px-5 py-3" to="/" style={{ fontSize: "12px" }}>
               Continue comprando
             </Link>
           </div>
-        ) : (
+        ) : ( */}
           <>
             <div className=" alert alert-info text-center mt-3">
               Total de itens
               <Link className="text-success mx-2" to="/cart">
-                ({cartItems.length})
+                ({/*cartItems.length*/0})
               </Link>
             </div>
-            {cartItems.map((item) => (
+            {/* {cartItems.map((item) => (
               <React.Fragment key={item.id}>
                 <div className="cart-iterm row">
                   <div
@@ -89,7 +89,7 @@ const CartPage = () => {
                   </div>
                 </div>
               </React.Fragment>
-            ))}
+            ))} */}
             <div className="total">
               <span className="sub">total:</span>
               <span className="total-price">R${43.53}</span>
@@ -106,7 +106,7 @@ const CartPage = () => {
               )}
             </div>
           </>
-        )}
+        
       </div>
     </>
   );
