@@ -87,7 +87,7 @@ const AdressPage = () => {
 
         setDefaultAddress();
 
-    });
+    }, []);
 
     const handleChangeSelect = (e) => {
         setState(e);

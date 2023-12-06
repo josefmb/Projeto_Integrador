@@ -92,7 +92,7 @@ const ShippingPage = () => {
 
         setDefaultAddress();
 
-    });
+    }, []);
 
     return (
         <>
